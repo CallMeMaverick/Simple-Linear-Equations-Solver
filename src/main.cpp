@@ -143,7 +143,7 @@ int main()
     {
         int userAction;
 
-        cout << "What would you like to with the equation?" << endl;
+        cout << "What would you like to do with the equation?" << endl;
         cout << "---> 1. Discriminant" << endl;
         cout << "---> 2. Roots" << endl;
         cout << "---> 3. Both Discriminant and Roots" << endl;
