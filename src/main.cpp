@@ -7,8 +7,17 @@
 
 using namespace std;
 
+/**
+ * @brief Prints out the equation
+ * 
+ * @param a a parameter
+ * @param b b parameter
+ * @param c c parameter
+ * @return string formatted equation using stringstream
+ */
 string Equation(double a, double b, double c)
 {
+    // Create a stringstream to build the formatted equation string
     stringstream equationStream;
 
     string A = (a < 0 ? "" : "");
@@ -16,6 +25,7 @@ string Equation(double a, double b, double c)
     string C = (c < 0 ? "" : "+");
 
     equationStream << A << a << "x²" << B << b << 'x' << C << c << "=0";
+    // Get the string representation from the stringstream
     return equationStream.str();
 }
 
@@ -25,30 +35,46 @@ string Equation(double a, double b, double c)
  * @param a parameter a
  * @param b parameter b
  * @param c parameter c
- * @return typenameT discriminant value
+ * @return T discriminant value
  */
 template<typename T>
 T Discriminant(T a, T b, T c)
 {
+    // Get discriminant using the formula: b²-4ac
     T discriminant = ((pow(b, 2)) - 4 * a * c);
     return discriminant;
 }
 
-
+/**
+ * @brief Finds roots considering the discriminant value
+ * 
+ * @tparam T typename
+ * @param discriminant discriminant value found previously
+ * @param a a parameter
+ * @param b b parameter
+ * @param c c parameter
+ * @return string formatted string using stringstream
+ */
 template<typename T>
 string FindRoots(T discriminant, double a, double b, double c)
 {
+    // Create a stringstream to build the formatted roots string
     stringstream rootsStream;
+    // Set the precision for the roots
     rootsStream << fixed << setprecision(2);
 
+    // Consider possible discriminant values
     if (discriminant < 0)
         return "No roots have been found;";
     
     if (discriminant == 0)
     {
         T theOnlyRoot = -b / (2.0 * a);
+        // Create stringstream object
         stringstream ss;
+        // 'fixed' manipulator ensures that the subsequent floating-point numbers will be presented in fixed-point notation
         ss << fixed << "The only root found is " << setprecision(2) << theOnlyRoot;
+        // return constructed string
         return ss.str();
     }
 
@@ -64,6 +90,13 @@ string FindRoots(T discriminant, double a, double b, double c)
     return "";
 }
 
+/**
+ * @brief Set the values in case user wants to change the equation
+ * 
+ * @param a a parameter
+ * @param b b parameter
+ * @param c c parameter
+ */
 void SetValues(double& a, double& b, double& c)
 {
     cout << "New a: ";
@@ -132,6 +165,7 @@ int main()
             cout << "Roots: " << FindRoots(Discriminant(a, b, c), a, b, c) << endl;
             break;
         case 4:
+            // Prompt the user to enter valid values as long as needed
             while (true) 
             {
                 SetValues(a, b, c);
